@@ -93,8 +93,8 @@ basic_latin_characters = {
 }
 # ~~ END BASIC LATIN CHARACTERS SCHEMA ~~
 
-# ~~ POTENTIAL SPOOFS SCHEMA: Chars. that may be used as spoofs of latin chars.
-potential_spoofs_schema = {
+# ~~ NON-BASIC CHARACTERS SCHEMA: Chars. that may be used to spoof basic chars.
+non_basic_characters_schema = {
     'potential_spoof': {
         'type': 'string',
         'minlength': 1,
@@ -104,7 +104,7 @@ potential_spoofs_schema = {
     }
 }
 
-potential_spoofs = {
+non_basic_characters = {
     'additional_lookup': {
         'url': 'regex("[\w]+")',
         'field': 'potential_spoof'
@@ -112,16 +112,16 @@ potential_spoofs = {
     'cache_control': 'max-age=10,must-revalidate',
     'cache_expires': 10,
     'resource_methods': ['GET', 'POST'],
-    'schema': potential_spoofs_schema
+    'schema': non_basic_characters_schema
 }
-# ~~ END POTENTIAL SPOOFS SCHEMA ~~
+# ~~ END NON-BASIC CHARACTERS SCHEMA ~~
 
 # map each of the schemas above to a branch of the API
 DOMAIN = {
     'mappings': mappings,
     'basic_characters': basic_latin_characters,
     'feed': feed,
-    'characters': potential_spoofs
+    'non_basic_characters': non_basic_characters
 }
 
 # provide details for mongo instance
