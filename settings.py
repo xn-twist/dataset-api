@@ -5,7 +5,7 @@ RESOURCE_METHODS = ['GET', 'POST']
 # items  (defaults to read-only item access).
 ITEM_METHODS = ['GET', 'PATCH', 'PUT']
 
-# ~~ MAPPINGS SCHEMA: Mappings between latin chars. and potential spoof chars.
+# ~~ MAPPINGS SCHEMA: Mappings between latin chars and potential spoof chars
 mappings_schema = {
     'character': {
         'type': 'string',
@@ -68,7 +68,7 @@ feed = {
 }
 # ~~ END FEED SCHEMA ~~
 
-# ~~ BASIC LATIN CHARACTERS SCHEMA: Basic latin chars. (a-z and 0-9)
+# ~~ BASIC LATIN CHARACTERS SCHEMA: Basic latin chars (a-z and 0-9)
 basic_latin_characters_schema = {
     'basic_character': {
         'type': 'string',
@@ -91,7 +91,7 @@ basic_latin_characters = {
 }
 # ~~ END BASIC LATIN CHARACTERS SCHEMA ~~
 
-# ~~ NON-BASIC CHARACTERS SCHEMA: Chars. that may be used to spoof basic chars.
+# ~~ NON-BASIC CHARACTERS SCHEMA: chars that may be used to spoof basic chars
 non_basic_characters_schema = {
     'potential_spoof': {
         'type': 'string',
@@ -114,12 +114,77 @@ non_basic_characters = {
 }
 # ~~ END NON-BASIC CHARACTERS SCHEMA ~~
 
+# ~~ SUGGESTED DEPRECATION FEED SCHEMA: chars that have been suggested for deprecation
+suggested_deprecations_feed_schema = {
+    'character': {
+        'type': 'string',
+        'minlength': 1,
+        'maxlength': 1,
+        'required': True,
+        'unique': False,
+    }
+}
+
+suggested_deprecations_feed = {
+    'cache_control': 'max-age=10,must-revalidate',
+    'cache_expires': 10,
+    'resource_methods': ['GET', 'POST'],
+    'schema': suggested_deprecations_feed_schema
+}
+# ~~ END SUGGESTED DEPRECATION FEED SCHEMA ~~
+
+# ~~ UNMAPPED CHARACTER FEED SCHEMA: chars to which no basic char. was mapped
+unmapped_character_feed_schema = {
+    'unmapped_character': {
+        'type': 'string',
+        'minlength': 1,
+        'maxlength': 1,
+        'required': True,
+        'unique': False,
+    }
+}
+
+unmapped_character_feed = {
+    'cache_control': 'max-age=10,must-revalidate',
+    'cache_expires': 10,
+    'resource_methods': ['GET', 'POST'],
+    'schema': unmapped_character_feed_schema
+}
+# ~~ END UNMAPPED CHARACTER FEED SCHEMA ~~
+
+# ~~ DEPRICATED CHARACTERS SCHEMA: Chars that have been removed from the set
+# of non_basic_chars
+depricated_characters_schema = {
+    'depricated_character': {
+        'type': 'string',
+        'minlength': 1,
+        'maxlength': 1,
+        'required': True,
+        'unique': True,
+    }
+}
+
+depricated_characters = {
+    'additional_lookup': {
+        'url': 'regex("[\w]+")',
+        'field': 'depricated_character'
+    },
+    'cache_control': 'max-age=10,must-revalidate',
+    'cache_expires': 10,
+    'resource_methods': ['GET', 'POST'],
+    'schema': depricated_characters_schema
+}
+# ~~ END DEPRICATED CHARACTERS SCHEMA ~~
+
 # map each of the schemas above to a branch of the API
 DOMAIN = {
     'mappings': mappings,
     'basic_characters': basic_latin_characters,
     'feed': feed,
-    'non_basic_characters': non_basic_characters
+    'non_basic_characters': non_basic_characters,
+    'suggested_deprecations': suggested_deprecations_feed,
+    'unmapped_characters': unmapped_character_feed,
+    'depricated_characters': depricated_characters
 }
 
 # provide details for mongo instance
