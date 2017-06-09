@@ -4,6 +4,8 @@ RESOURCE_METHODS = ['GET', 'POST']
 # Enable available operations for individual items (defaults to ['GET'])
 ITEM_METHODS = ['GET', 'PATCH', 'PUT', 'DELETE']
 
+PUBLIC_METHODS = ['GET']
+
 # ~~ ADMINS SCHEMA: Define the administrators of the system
 admin_schema = {
     'username': {
@@ -30,6 +32,7 @@ admins = {
     # We choose to override global cache-control directives for this resource.
     'cache_control': 'max-age=10,must-revalidate',
     'cache_expires': 10,
+    'public_methods': [],
 
     'schema': admin_schema
 }
