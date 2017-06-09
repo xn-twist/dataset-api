@@ -1,11 +1,35 @@
-import redis
 from eve import Eve
+from eve.auth import BasicAuth
+import redis
 
-# start an instance of Redis
-r = redis.StrictRedis(host='127.0.0.1', port=6379, db=0)
 
-# start the Eve app using Redis
-app = Eve(redis=r)
+class SimpleAuth(BasicAuth):
+    def check_auth(self, username, password, allowed_roles, resource, method):
+        # remove authentication for the base branch
+        if resource is None and method == "GET":
+            return True
+        # authenticate any calls with non-public methods
+        else:
+            # find administrators from the DB
+            administrators = app.data.driver.db['administrators']
+            # try to find an admin account matching the given auth
+            this_admin = administrators.find_one({'username': username,
+                                                  'password': password})
 
-# run the Eve app broadcasting it publically
-app.run(host='0.0.0.0')
+            # if the credentials match an admin account, return true
+            if this_admin:
+                return True
+            # otherwise return false and block access
+            else:
+                return False
+
+
+if __name__ == '__main__':
+    # start an instance of Redis
+    r = redis.StrictRedis(host='127.0.0.1', port=6379, db=0)
+
+    # instantiate Eve api
+    app = Eve(auth=SimpleAuth, redis=r)
+
+    # start the API broadcasting globally
+    app.run(host='0.0.0.0')
