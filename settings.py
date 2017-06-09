@@ -143,7 +143,7 @@ non_basic_characters = {
 }
 # ~~ END NON-BASIC CHARACTERS SCHEMA ~~
 
-# ~~ SUGGESTED DEPRECATION FEED SCHEMA: chars that have been suggested for deprecation
+# ~~ SUGGESTED DEPRECATION FEED SCHEMA: chars suggested for deprecation
 suggested_deprecations_feed_schema = {
     'character': {
         'type': 'string',
@@ -207,7 +207,7 @@ depricated_characters = {
 
 # map each of the schemas above to a branch of the API
 DOMAIN = {
-    'admins': admins,
+    'administrators': admins,
     'mappings': mappings,
     'basic_characters': basic_latin_characters,
     'feed': feed,
