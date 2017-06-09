@@ -4,6 +4,37 @@ RESOURCE_METHODS = ['GET', 'POST']
 # Enable available operations for individual items (defaults to ['GET'])
 ITEM_METHODS = ['GET', 'POST', 'PATCH', 'PUT', 'DELETE']
 
+# ~~ ADMINS SCHEMA: Define the administrators of the system
+admin_schema = {
+    'username': {
+        'type': 'string',
+        'minlength': 3,
+        'maxlength': 12,
+        'required': True,
+        'unique': True,
+    },
+    'password': {
+        'type': 'string',
+        'minlength': 6,
+        'maxlength': 32,
+        'required': True,
+    }
+}
+
+admins = {
+    'additional_lookup': {
+        'url': 'regex("[\w]+")',
+        'field': 'username'
+    },
+
+    # We choose to override global cache-control directives for this resource.
+    'cache_control': 'max-age=10,must-revalidate',
+    'cache_expires': 10,
+
+    'schema': admin_schema
+}
+# ~~ END ADMINS SCHEMA ~~
+
 # ~~ MAPPINGS SCHEMA: Mappings between latin chars and potential spoof chars
 mappings_schema = {
     'character': {
@@ -176,6 +207,7 @@ depricated_characters = {
 
 # map each of the schemas above to a branch of the API
 DOMAIN = {
+    'admins': admins,
     'mappings': mappings,
     'basic_characters': basic_latin_characters,
     'feed': feed,
