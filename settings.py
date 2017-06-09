@@ -1,9 +1,8 @@
 # Enables available operations for resources/collections (defaults to ['GET'])
 RESOURCE_METHODS = ['GET', 'POST']
 
-# Enable reads (GET), edits (PATCH), and replacements (PUT) of individual
-# items  (defaults to read-only item access).
-ITEM_METHODS = ['GET', 'PATCH', 'PUT']
+# Enable available operations for individual items (defaults to ['GET'])
+ITEM_METHODS = ['GET', 'POST', 'PATCH', 'PUT', 'DELETE']
 
 # ~~ MAPPINGS SCHEMA: Mappings between latin chars and potential spoof chars
 mappings_schema = {
@@ -36,8 +35,7 @@ mappings = {
     'cache_control': 'max-age=10,must-revalidate',
     'cache_expires': 10,
 
-    # most global settings can be overridden at resource level
-    'resource_methods': ['GET', 'POST'],
+    'public_methods': ["GET"],
 
     'schema': mappings_schema
 }
@@ -63,7 +61,7 @@ feed = {
     'item_title': 'feed',
     'cache_control': 'max-age=10,must-revalidate',
     'cache_expires': 10,
-    'resource_methods': ['GET', 'POST'],
+    'public_methods': ["GET", "POST"],
     'schema': feed_schema
 }
 # ~~ END FEED SCHEMA ~~
@@ -86,7 +84,7 @@ basic_latin_characters = {
     },
     'cache_control': 'max-age=10,must-revalidate',
     'cache_expires': 10,
-    'resource_methods': ['GET', 'POST'],
+    'public_methods': ["GET"],
     'schema': basic_latin_characters_schema
 }
 # ~~ END BASIC LATIN CHARACTERS SCHEMA ~~
@@ -109,7 +107,7 @@ non_basic_characters = {
     },
     'cache_control': 'max-age=10,must-revalidate',
     'cache_expires': 10,
-    'resource_methods': ['GET', 'POST'],
+    'public_methods': ["GET"],
     'schema': non_basic_characters_schema
 }
 # ~~ END NON-BASIC CHARACTERS SCHEMA ~~
@@ -128,7 +126,7 @@ suggested_deprecations_feed_schema = {
 suggested_deprecations_feed = {
     'cache_control': 'max-age=10,must-revalidate',
     'cache_expires': 10,
-    'resource_methods': ['GET', 'POST'],
+    'public_methods': ["GET", "POST"],
     'schema': suggested_deprecations_feed_schema
 }
 # ~~ END SUGGESTED DEPRECATION FEED SCHEMA ~~
@@ -147,7 +145,7 @@ unmapped_character_feed_schema = {
 unmapped_character_feed = {
     'cache_control': 'max-age=10,must-revalidate',
     'cache_expires': 10,
-    'resource_methods': ['GET', 'POST'],
+    'public_methods': ["GET", "POST"],
     'schema': unmapped_character_feed_schema
 }
 # ~~ END UNMAPPED CHARACTER FEED SCHEMA ~~
@@ -171,7 +169,7 @@ depricated_characters = {
     },
     'cache_control': 'max-age=10,must-revalidate',
     'cache_expires': 10,
-    'resource_methods': ['GET', 'POST'],
+    'public_methods': ["GET"],
     'schema': depricated_characters_schema
 }
 # ~~ END DEPRICATED CHARACTERS SCHEMA ~~
