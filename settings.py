@@ -2,7 +2,7 @@
 RESOURCE_METHODS = ['GET', 'POST']
 
 # Enable available operations for individual items (defaults to ['GET'])
-ITEM_METHODS = ['GET', 'POST', 'PATCH', 'PUT', 'DELETE']
+ITEM_METHODS = ['GET', 'PATCH', 'PUT', 'DELETE']
 
 # ~~ ADMINS SCHEMA: Define the administrators of the system
 admin_schema = {
