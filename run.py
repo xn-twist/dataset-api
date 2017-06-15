@@ -4,6 +4,9 @@ import redis
 
 
 class SimpleAuth(BasicAuth):
+    """Class to provide basic authorization to certain API requests."""
+
+    @staticmethod
     def check_auth(self, username, password, allowed_roles, resource, method):
         # find administrators from the DB
         administrators = app.data.driver.db['administrators']
