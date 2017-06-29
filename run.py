@@ -7,7 +7,7 @@ class SimpleAuth(BasicAuth):
     """Class to provide basic authorization to certain API requests."""
 
     @staticmethod
-    def check_auth(self, username, password, allowed_roles, resource, method):
+    def check_auth(username, password, allowed_roles, resource, method):
         # find administrators from the DB
         administrators = app.data.driver.db['administrators']
         # try to find an admin account matching the given auth
