@@ -208,6 +208,29 @@ depricated_characters = {
 }
 # ~~ END DEPRICATED CHARACTERS SCHEMA ~~
 
+# ~~ HIGH SCORE SCHEMA: Keep track of high scorers initials and their score
+high_score_schema = {
+    'initials': {
+        'type': 'string',
+        'minlength': 1,
+        'maxlength': 3,
+        'required': True,
+        'unique': False,
+    },
+    'score': {
+        'type': 'integer',
+        'required': True,
+    }
+}
+
+high_scores = {
+    'cache_control': 'max-age=10,must-revalidate',
+    'cache_expires': 10,
+    'public_methods': ["GET", "POST"],
+    'schema': high_score_schema
+}
+# ~~ END HIGH SCORE SCHEMA ~~
+
 # map each of the schemas above to a branch of the API
 DOMAIN = {
     'administrators': admins,
@@ -217,7 +240,8 @@ DOMAIN = {
     'non_basic_characters': non_basic_characters,
     'suggested_deprecations': suggested_deprecations_feed,
     'unmapped_characters': unmapped_character_feed,
-    'depricated_characters': depricated_characters
+    'depricated_characters': depricated_characters,
+    'high_scores': high_scores
 }
 
 # provide details for mongo instance
