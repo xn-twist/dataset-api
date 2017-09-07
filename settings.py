@@ -184,10 +184,10 @@ unmapped_character_feed = {
 }
 # ~~ END UNMAPPED CHARACTER FEED SCHEMA ~~
 
-# ~~ DEPRICATED CHARACTERS SCHEMA: Chars that have been removed from the set
+# ~~ DEPRECATED CHARACTERS SCHEMA: Chars that have been removed from the set
 # of non_basic_chars
-depricated_characters_schema = {
-    'depricated_character': {
+deprecated_characters_schema = {
+    'deprecated_character': {
         'type': 'string',
         'minlength': 1,
         'maxlength': 1,
@@ -196,17 +196,17 @@ depricated_characters_schema = {
     }
 }
 
-depricated_characters = {
+deprecated_characters = {
     'additional_lookup': {
         'url': 'regex("[\w]+")',
-        'field': 'depricated_character'
+        'field': 'deprecated_character'
     },
     'cache_control': 'max-age=10,must-revalidate',
     'cache_expires': 10,
     'public_methods': ["GET"],
-    'schema': depricated_characters_schema
+    'schema': deprecated_characters_schema
 }
-# ~~ END DEPRICATED CHARACTERS SCHEMA ~~
+# ~~ END DEPRECATED CHARACTERS SCHEMA ~~
 
 # ~~ HIGH SCORE SCHEMA: Keep track of high scorers initials and their score
 high_score_schema = {
@@ -240,7 +240,7 @@ DOMAIN = {
     'non_basic_characters': non_basic_characters,
     'suggested_deprecations': suggested_deprecations_feed,
     'unmapped_characters': unmapped_character_feed,
-    'depricated_characters': depricated_characters,
+    'deprecated_characters': deprecated_characters,
     'high_scores': high_scores
 }
 
