@@ -43,7 +43,7 @@ mappings_schema = {
     'character': {
         'type': 'string',
         'minlength': 1,
-        'maxlength': 1,
+        'maxlength': 2,
         'required': True,
         'unique': True,
     },
@@ -80,7 +80,7 @@ feed_schema = {
     'character': {
         'type': 'string',
         'minlength': 1,
-        'maxlength': 1,
+        'maxlength': 2,
         'required': True,
     },
     'spoof': {
